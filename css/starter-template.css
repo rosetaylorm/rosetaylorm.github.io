@@ -1,0 +1,64 @@
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+  height: 100%;
+}
+
+.color-block {
+	background-color: #282828 ;
+	height: 300px;
+}
+
+.thumbnail {
+	height: 275px;
+}
+
+.thumbail-image {
+	height: 65%;
+}
+
+.final-block {
+	text-align: right;
+	font-size: 10px;
+	font-color: #FFFFFF;
+}
+
+.contact {
+	padding:40px 15px;
+}
+
+#projects {
+	padding:40px 15px;
+}
+#social {
+	padding: 20px;
+}
+
+#facebook-link {
+	color: #282828;
+}
+
+#twitter-link {
+	color: #282828;
+}
+
+#linkedin-link {
+	color: #282828;
+}
+
+#facebook-link:hover {
+	color: #3B5998 !important;
+}
+
+#twitter-link:hover {
+	color: #4099FF !important;
+}
+
+#linkedin-link:hover {
+	color: #4875B4;
+}
+
+

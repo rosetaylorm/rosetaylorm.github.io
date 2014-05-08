@@ -1,0 +1,113 @@
+
+<html>
+<!--Taylor Rose-->
+<!--Stellar: roset-->
+<!--Section: R03, Kelley V Determan-->
+<!--Problem Set 3-->
+<head>
+	<script src="Vector2D.js"></script>
+
+	<script>
+
+	var context;
+	var myCircle;
+	var particle1;
+	var particle2;
+	var particle3;
+	var WIDTH;
+	var HEIGHT;
+	var gravity = 1;
+	var deltaT = 0.1;
+
+	window.onload=getCanvas;    
+	function getCanvas(){
+		var canvas = document.getElementById("myCanvas");
+		context=canvas.getContext("2d");
+		WIDTH = canvas.width;
+		HEIGHT = canvas.height;
+		GenerateParticles();
+		setInterval(UpdateParticles, 1/deltaT);
+	
+	};
+	function UpdateParticles(){
+		context.clearRect(0, 0, WIDTH, HEIGHT);
+		particle1.updateUnderGravity();
+		particle2.updateUnderGravity();
+		particle3.updateUnderGravity();
+	};
+	function Point(x,y){
+		return {x:x, y:y};
+	};
+	// Projectile Factory
+	function Circle(pos,radius,velocity){
+		this.trail = Array();
+		this.force = Vector(0,0,0);
+		this.velocity = velocity;
+		this.mass = 1;
+		this.updateUnderGravity = function(){
+			var x = this.x;
+			var y = this.y;
+		    this.force.y =  gravity * this.mass; // add in gravity
+		    // Put code here to update velocity 
+		    this.velocity.x = this.velocity.x + (this.force.x)/(this.mass)*deltaT;
+		    this.velocity.y = this.velocity.y + (this.force.y)/(this.mass)*deltaT;
+		
+            var dx = this.velocity.x * deltaT;
+            var dy = this.velocity.y * deltaT;
+			if (x + dx > WIDTH || x + dx < 0){
+				this.velocity.x = -this.velocity.x;
+			}
+			if (y + dy >= HEIGHT || y + dy <= 0){
+				this.velocity.y = -this.velocity.y;
+			}
+			this.x += this.velocity.x*deltaT;
+			this.y += this.velocity.y*deltaT;
+
+			DrawCircle(this.x, this.y, this.radius)
+		};
+		
+		return { x:pos.x, y:pos.y, radius:radius,
+			velocity:this.velocity, force:this.force, mass:this.mass,
+			updateUnderGravity:this.updateUnderGravity
+		};
+	}
+	function GenerateParticles(){
+		var a = Point(0, 390);
+		var b = Point(0, 390);
+		var c = Point(0, 390);
+
+		particle1 = Circle(a, 15, Vector(-20*Math.cos(Math.PI/6), -20*Math.sin(Math.PI/6), 0));
+		particle2 = Circle(b, 15, Vector(-20*Math.cos(Math.PI/4), -20*Math.sin(Math.PI/4), 0));
+		particle3 = Circle(c, 15, Vector(-20*Math.cos(Math.PI/3), -20*Math.sin(Math.PI/3), 0));
+	
+		DrawCircle(particle1.x, particle1.y, particle1.radius);
+		DrawCircle(particle2.x, particle2.y, particle2.radius);
+		DrawCircle(particle3.x, particle3.y, particle3.radius);
+
+		// var distanceA = 2*particle1.velocity.x*particle1.velocity.y/gravity;
+		// var distanceB = 2*particle2.velocity.x*particle2.velocity.y/gravity;
+		// var distanceC = 2*particle3.velocity.x*particle3.velocity.y/gravity;
+
+		// var timeA = Math.abs(distanceA/particle1.velocity.x)/deltaT;
+		// var timeB = Math.abs(distanceB/particle2.velocity.x)/deltaT;
+		// var timeC = Math.abs(distanceC/particle3.velocity.x)/deltaT;
+
+		// console.log(distanceA+" distanceA", distanceB+" distanceB", distanceC+" distanceC");
+		// console.log(timeA+" timeA", timeB+" timeB", timeC+" timeC");
+	};
+// draw on canvas using 2D context 
+	function DrawCircle(x,y,radius){
+		context.fillStyle = 'rgba(255, 0, 0, .5)'
+		context.beginPath();
+		context.arc(x, y, radius, 0, Math.PI*2, true);
+		context.closePath();
+		context.fill();
+	}
+
+    </script>
+</head>
+<body>
+	<canvas id="myCanvas" width="600" height="400">
+    </canvas>
+</body>
+</html>
