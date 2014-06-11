@@ -49,6 +49,10 @@ body {
 	color: #282828;
 }
 
+#mail-link {
+	color: #282828;
+}
+
 #facebook-link:hover {
 	color: #3B5998 !important;
 }
@@ -59,6 +63,10 @@ body {
 
 #linkedin-link:hover {
 	color: #4875B4;
+}
+
+#mail-link:hover{
+	color:#0099BB;
 }
 
 
